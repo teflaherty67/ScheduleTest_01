@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>ScheduleTest_01 - Command 1</Text>
+    <Description>Some description for ScheduleTest_01</Description>
+    <Assembly>ScheduleTest_01.dll</Assembly>
+    <FullClassName>ScheduleTest_01.Command1</FullClassName>
+    <ClientId>1bb50682-b285-453f-adb2-5eaf1ac9eb9a</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Text>ScheduleTest_01 - Command 2</Text>
+    <Description>Some description for ScheduleTest_01</Description>
+    <Assembly>ScheduleTest_01.dll</Assembly>
+    <FullClassName>ScheduleTest_01.Command2</FullClassName>
+    <ClientId>fda8809f-b7b1-4766-a3eb-3adc481d0ec0</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Text>Create Sheet Index</Text>
+    <Description>Some description for ScheduleTest_01</Description>
+    <Assembly>ScheduleTest_01.dll</Assembly>
+    <FullClassName>ScheduleTest_01.cmdIndex</FullClassName>
+    <ClientId>A9DC8207-9954-4F6E-BC1B-3A4726AF468A</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>ScheduleTest_01</Name>
+    <Assembly>ScheduleTest_01.dll</Assembly>
+    <FullClassName>ScheduleTest_01.App</FullClassName>
+    <ClientId>e917685c-446b-4371-b4ad-a6be1f957746</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+</RevitAddIns>
