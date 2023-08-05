@@ -62,13 +62,15 @@ namespace ScheduleTest_01
 
                     DesignOption curOption = Utils.getDesignOptionByName(doc, newLast); // this code doesn't do anything
 
-                    // set the value of the schedule filter
+                    // set the value of the schedule filter, need to change the filter to Code Filter - Contains - 4
 
                     // get the Code Filter parameter
                     Parameter curParam = Utils.GetParameterByName(doc, "Code Filter", BuiltInCategory.OST_Sheets);
 
                     // get the element Id of the parameter
                     ElementId filterCodeId = Utils.GetProjectParameterId(doc, "Code Filter");
+
+                    // create the filter field
 
 
                 }
