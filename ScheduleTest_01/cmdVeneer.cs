@@ -31,48 +31,34 @@ namespace ScheduleTest_01
             using (Transaction t = new Transaction(doc))
             {
                 // start the transaction
-                t.Start("Create Shet Index");
+                t.Start("Create Exterior Veneer Schedule");
 
                 // check to see if the sheet index exists
 
-                ViewSchedule schedIndex = Utils.GetScheduleByNameContains(doc, "Sheet Index - Elevation S");
+                ViewSchedule veneerIndex = Utils.GetScheduleByNameContains(doc, "Exterior Veneer Calculations - Elevation S ");
 
-                if (schedIndex == null)
+                if (veneerIndex == null)
                 {
                     // duplicate the first schedule found with Sheet Index in the name
-                    List<ViewSchedule> listSched = Utils.GetAllScheduleByNameContains(doc, "Sheet Index");
+                    List<ViewSchedule> listSched = Utils.GetAllScheduleByNameContains(doc, "Exterior Veneer Calculations");
 
                     ViewSchedule dupSched = listSched.FirstOrDefault();
 
-                    Element viewSched = doc.GetElement(dupSched.Duplicate(ViewDuplicateOption.Duplicate));       
+                    Element viewSched = doc.GetElement(dupSched.Duplicate(ViewDuplicateOption.Duplicate));
 
                     // rename the duplicated schedule to the new elevation
 
                     string originalName = viewSched.Name;
-                    string[] schedTitle = originalName.Split('C');
+                    string[] schedTitle = originalName.Split('-');
 
-                    string curTitle = schedTitle[0];
-
-                    string lastChar = curTitle.Substring(curTitle.Length - 2);
-                    string newLast = "S";
-
-                    viewSched.Name = curTitle.Replace(lastChar, newLast);
+                    viewSched.Name = schedTitle[0] + "- Elevation S";
 
                     // set the design option to the specified elevation designation
+                    DesignOption curOption = Utils.getDesignOptionByName(doc, "S");
 
-                    DesignOption curOption = Utils.getDesignOptionByName(doc, newLast); // this code doesn't do anything
+                    Parameter doParam = viewSched.get_Parameter(BuiltInParameter.VIEWER_OPTION_VISIBILITY);
 
-                    // set the value of the schedule filter, need to change the filter to Code Filter - Contains - 4
-
-                    // get the Code Filter parameter
-                    Parameter curParam = Utils.GetParameterByName(doc, "Code Filter", BuiltInCategory.OST_Sheets);
-
-                    // get the element Id of the parameter
-                    ElementId filterCodeId = Utils.GetProjectParameterId(doc, "Code Filter");
-
-                    // create the filter field
-
-
+                    doParam.Set(curOption.Id); //??? the code is getting the right option, but it's not changing anything in the model                     
                 }
 
                 t.Commit();

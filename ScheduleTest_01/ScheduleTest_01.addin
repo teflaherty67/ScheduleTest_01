@@ -27,6 +27,15 @@
     <VendorId>com.YOUR COMPANY NAME</VendorId>
     <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
   </AddIn>
+  <AddIn Type="Command">
+    <Text>Create Exterior Veneer Schedule</Text>
+    <Description>Some description for ScheduleTest_01</Description>
+    <Assembly>ScheduleTest_01.dll</Assembly>
+    <FullClassName>ScheduleTest_01.cmdVeneer</FullClassName>
+    <ClientId>109F6D43-DFC5-4060-8A8D-B6437D78757E</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
   <AddIn Type="Application">
     <Name>ScheduleTest_01</Name>
     <Assembly>ScheduleTest_01.dll</Assembly>

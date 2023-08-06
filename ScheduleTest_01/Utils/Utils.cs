@@ -154,9 +154,9 @@ namespace ScheduleTest_01
 
         #region Design Options
 
-        internal static List<DesignOption> getAllDesignOptions(Document curDoc)
+        internal static List<DesignOption> getAllDesignOptions(Document doc)
         {
-            FilteredElementCollector curCol = new FilteredElementCollector(curDoc);
+            FilteredElementCollector curCol = new FilteredElementCollector(doc);
             curCol.OfCategory(BuiltInCategory.OST_DesignOptions);
 
             List<DesignOption> doList = new List<DesignOption>();
@@ -168,10 +168,10 @@ namespace ScheduleTest_01
             return doList;
         }
 
-        internal static DesignOption getDesignOptionByName(Document curDoc, string designOpt)
+        internal static DesignOption getDesignOptionByName(Document doc, string designOpt)
         {
             //get all design options
-            List<DesignOption> doList = getAllDesignOptions(curDoc);
+            List<DesignOption> doList = getAllDesignOptions(doc);
 
             foreach (DesignOption curOpt in doList)
             {
