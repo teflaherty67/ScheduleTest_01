@@ -17,7 +17,7 @@ using System.Windows.Input;
 namespace ScheduleTest_01
 {
     [Transaction(TransactionMode.Manual)]
-    public class cmdIndex : IExternalCommand
+    public class cmdVeneer : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -31,7 +31,7 @@ namespace ScheduleTest_01
             using (Transaction t = new Transaction(doc))
             {
                 // start the transaction
-                t.Start("Create Sheet Index");
+                t.Start("Create Shet Index");
 
                 // check to see if the sheet index exists
 
@@ -44,12 +44,11 @@ namespace ScheduleTest_01
 
                     ViewSchedule dupSched = listSched.FirstOrDefault();
 
-                    Element indexSched = doc.GetElement(dupSched.Duplicate(ViewDuplicateOption.Duplicate)); 
-                    // ??? is there another way to duplicate a schedule, this method makes it an element
-                    // and the code I found to set the filter needs a view schedule element      
+                    Element viewSched = doc.GetElement(dupSched.Duplicate(ViewDuplicateOption.Duplicate));       
 
                     // rename the duplicated schedule to the new elevation
-                    string originalName = indexSched.Name;
+
+                    string originalName = viewSched.Name;
                     string[] schedTitle = originalName.Split('C');
 
                     string curTitle = schedTitle[0];
@@ -57,24 +56,23 @@ namespace ScheduleTest_01
                     string lastChar = curTitle.Substring(curTitle.Length - 2);
                     string newLast = "S";
 
-                    indexSched.Name = curTitle.Replace(lastChar, newLast);
+                    viewSched.Name = curTitle.Replace(lastChar, newLast);
 
                     // set the design option to the specified elevation designation
 
                     DesignOption curOption = Utils.getDesignOptionByName(doc, newLast); // this code doesn't do anything
 
-                    // ??? how to set the value of the schedule filter, need to change the
-                    // value of the filter to match the code filter of the new elevation
+                    // set the value of the schedule filter, need to change the filter to Code Filter - Contains - 4
 
-                    // code I found requires a view schedule, not an element
+                    // get the Code Filter parameter
+                    Parameter curParam = Utils.GetParameterByName(doc, "Code Filter", BuiltInCategory.OST_Sheets);
 
-                    //ScheduleFilter codeFilter = indexSched.Definition.GetFilter(0);
-                    
-                    //if (codeFilter.IsStringValue)
-                    //{
-                    //    codeFilter.SetValue("4");
-                    //    indexSched.Definition.SetValue(0, codeFilter);
-                    //}
+                    // get the element Id of the parameter
+                    ElementId filterCodeId = Utils.GetProjectParameterId(doc, "Code Filter");
+
+                    // create the filter field
+
+
                 }
 
                 t.Commit();
