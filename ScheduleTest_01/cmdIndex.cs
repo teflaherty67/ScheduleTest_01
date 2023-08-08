@@ -44,9 +44,7 @@ namespace ScheduleTest_01
 
                     ViewSchedule dupSched = listSched.FirstOrDefault();
 
-                    Element indexSched = doc.GetElement(dupSched.Duplicate(ViewDuplicateOption.Duplicate)); 
-                    // ??? is there another way to duplicate a schedule, this method makes it an element
-                    // and the code I found to set the filter needs a view schedule element      
+                    ViewSchedule indexSched = doc.GetElement(dupSched.Duplicate(ViewDuplicateOption.Duplicate)) as ViewSchedule;                          
 
                     // rename the duplicated schedule to the new elevation
                     string originalName = indexSched.Name;
@@ -59,22 +57,14 @@ namespace ScheduleTest_01
 
                     indexSched.Name = curTitle.Replace(lastChar, newLast);
 
-                    // set the design option to the specified elevation designation
+                    // update the code filter per new elevation
+                    ScheduleFilter codeFilter = indexSched.Definition.GetFilter(0);
 
-                    DesignOption curOption = Utils.getDesignOptionByName(doc, newLast); // this code doesn't do anything
-
-                    // ??? how to set the value of the schedule filter, need to change the
-                    // value of the filter to match the code filter of the new elevation
-
-                    // code I found requires a view schedule, not an element
-
-                    //ScheduleFilter codeFilter = indexSched.Definition.GetFilter(0);
-                    
-                    //if (codeFilter.IsStringValue)
-                    //{
-                    //    codeFilter.SetValue("4");
-                    //    indexSched.Definition.SetValue(0, codeFilter);
-                    //}
+                    if (codeFilter.IsStringValue)
+                    {
+                        codeFilter.SetValue("4");
+                        indexSched.Definition.SetFilter(0, codeFilter);
+                    }
                 }
 
                 t.Commit();
