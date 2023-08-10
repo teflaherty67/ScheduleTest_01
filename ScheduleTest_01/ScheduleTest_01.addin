@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RevitAddIns>
   <AddIn Type="Command">
-    <Text>ScheduleTest_01 - Command 1</Text>
+    <Text>Create Floor Area Schedule</Text>
     <Description>Some description for ScheduleTest_01</Description>
     <Assembly>ScheduleTest_01.dll</Assembly>
-    <FullClassName>ScheduleTest_01.Command1</FullClassName>
+    <FullClassName>ScheduleTest_01.cmdFloorArea</FullClassName>
     <ClientId>1bb50682-b285-453f-adb2-5eaf1ac9eb9a</ClientId>
     <VendorId>com.YOUR COMPANY NAME</VendorId>
     <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>

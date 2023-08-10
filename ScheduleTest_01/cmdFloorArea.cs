@@ -15,7 +15,7 @@ using System.Windows.Input;
 namespace ScheduleTest_01
 {
     [Transaction(TransactionMode.Manual)]
-    public class Command1 : IExternalCommand
+    public class cmdFloorArea : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -48,38 +48,38 @@ namespace ScheduleTest_01
                 ScheduleField catField = newSched.Definition.AddField(ScheduleFieldType.Instance, catFieldId);
                 catField.IsHidden = true;
 
-                ScheduleField comField = newSched.Definition.AddField(ScheduleFieldType.Instance, comFieldId);
-                comField.IsHidden = true;
+                //ScheduleField comField = newSched.Definition.AddField(ScheduleFieldType.Instance, comFieldId);
+                //comField.IsHidden = true;
 
-                ScheduleField nameField = newSched.Definition.AddField(ScheduleFieldType.Instance, nameFieldId);
-                nameField.IsHidden = false;
-                nameField.ColumnHeading = "Name";
-                nameField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
-                nameField.HorizontalAlignment = ScheduleHorizontalAlignment.Left;
+                //ScheduleField nameField = newSched.Definition.AddField(ScheduleFieldType.Instance, nameFieldId);
+                //nameField.IsHidden = false;
+                //nameField.ColumnHeading = "Name";
+                //nameField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
+                //nameField.HorizontalAlignment = ScheduleHorizontalAlignment.Left;
 
-                ScheduleField areaField = newSched.Definition.AddField(ScheduleFieldType.Instance, areaFieldId);
-                areaField.IsHidden = false;
-                areaField.ColumnHeading = "Area";
-                areaField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
-                areaField.HorizontalAlignment = ScheduleHorizontalAlignment.Right;               
+                //ScheduleField areaField = newSched.Definition.AddField(ScheduleFieldType.Instance, areaFieldId);
+                //areaField.IsHidden = false;
+                //areaField.ColumnHeading = "Area";
+                //areaField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
+                //areaField.HorizontalAlignment = ScheduleHorizontalAlignment.Right;               
 
-                ScheduleField numField = newSched.Definition.AddField(ScheduleFieldType.Instance, numFieldId);
-                numField.IsHidden = true;
+                //ScheduleField numField = newSched.Definition.AddField(ScheduleFieldType.Instance, numFieldId);
+                //numField.IsHidden = true;
 
-                // create the filters
-                ScheduleFilter catFilter = new ScheduleFilter(catField.FieldId, ScheduleFilterType.Contains, "Options");
-                newSched.Definition.AddFilter(catFilter);
+                //// create the filters
+                //ScheduleFilter catFilter = new ScheduleFilter(catField.FieldId, ScheduleFilterType.Contains, "Options");
+                //newSched.Definition.AddFilter(catFilter);
 
-                ScheduleFilter areaFilter = new ScheduleFilter(areaField.FieldId, ScheduleFilterType.GreaterThan, "0 SF");
-                newSched.Definition.AddFilter(areaFilter);
+                //ScheduleFilter areaFilter = new ScheduleFilter(areaField.FieldId, ScheduleFilterType.GreaterThan, "0 SF");
+                //newSched.Definition.AddFilter(areaFilter);
 
-                // set the sorting
-                ScheduleSortGroupField catSort = new ScheduleSortGroupField(catField.FieldId, ScheduleSortOrder.Ascending);
-                catSort.ShowFooter = true;
-                catSort.ShowFooterCount = true; //??? how to set the footer to be "Title and Totals"
-                catSort.ShowBlankLine = true;
+                //// set the sorting
+                //ScheduleSortGroupField catSort = new ScheduleSortGroupField(catField.FieldId, ScheduleSortOrder.Ascending);
+                //catSort.ShowFooter = true;
+                //catSort.ShowFooterCount = true; //??? how to set the footer to be "Title and Totals"
+                //catSort.ShowBlankLine = true;
 
-                ScheduleSortGroupField comSort = new ScheduleSortGroupField(comField.FieldId, ScheduleSortOrder.Ascending);
+                //ScheduleSortGroupField comSort = new ScheduleSortGroupField(comField.FieldId, ScheduleSortOrder.Ascending);
 
                 t.Commit();
             }

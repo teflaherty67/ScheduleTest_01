@@ -25,43 +25,36 @@ namespace ScheduleTest_01
             // this is a variable for the current Revit model
             Document doc = uiapp.ActiveUIDocument.Document;
 
-            // Your code goes here
-            FilteredElementCollector collector = new FilteredElementCollector(doc)
-                .OfClass(typeof(Level));
+            // fields to add to schedule
+            List<string> paramNames = new List<string>() { "Area Category", "Comments", "Name", "Area", "Number" };
 
-            // get area category id
-            ElementId catId = new ElementId(BuiltInCategory.OST_Areas);
-
-            // get parameter fields for schedule
-            ElementId catFieldId = Utils.GetProjectParameterId(doc, "Area Category");
-            ElementId comFieldId = Utils.GetProjectParameterId(doc, "Comments");
-            ElementId nameFieldId = Utils.GetProjectParameterId(doc, "Name");
-            ElementId areaFieldId = Utils.GetProjectParameterId(doc, "Area");
-            ElementId numFieldId = Utils.GetProjectParameterId(doc, "Number");
-
-            List<ElementId> fieldList = new List<ElementId> { catFieldId, comFieldId, nameFieldId, areaFieldId, numFieldId };
-
-            // create the transaction
             using (Transaction t = new Transaction(doc))
             {
-                // start the transaction
-                t.Start("Create Floor Area Schedule");
+                t.Start("Create Schedule");
 
+                // get the area schem for the area schedule
                 AreaScheme curAreaScheme = Utils.GetAreaSchemeByName(doc, "S Floor");
-                ViewSchedule curSched = Utils.CreateAreaSchedule(doc, "Floor Areas - Elevation S", curAreaScheme);
 
-                // add fields to schedule
-                foreach (ElementId elementId in fieldList)
-                {
-                    ScheduleField field = curSched.Definition.AddField(ScheduleFieldType.Instance, elementId);
-                }
+                // get the built-in areas category id
+                ElementId areasCategoryId = new ElementId(BuiltInCategory.OST_Areas);
 
-                ScheduleField catField = curSched.Definition.AddField(ScheduleFieldType.Instance, catFieldId);
-                catField.IsHidden = true;
+                // create the area schedule
+                ViewSchedule newSched = Utils.CreateAreaSchedule(doc, "Floor Areas - Elevation S", curAreaScheme);
 
-                ScheduleFilter catFilter = new ScheduleFilter(catField.FieldId, ScheduleFilterType.Contains, "Options");
-                curSched.Definition.AddFilter(catFilter);
+                // code filter schedule filter
+                ScheduleFilter filterCode = null;
+
+                // area Category & Comment sorting
+                ScheduleSortGroupField catField = null;
+                ScheduleSortGroupField comField = null;
+
+
+
+
+
             }
+                
+
 
 
                 return Result.Succeeded;
