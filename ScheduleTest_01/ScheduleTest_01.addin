@@ -10,10 +10,10 @@
     <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
   </AddIn>
   <AddIn Type="Command">
-    <Text>ScheduleTest_01 - Command 2</Text>
+    <Text>Create Frame Area Schedule</Text>
     <Description>Some description for ScheduleTest_01</Description>
     <Assembly>ScheduleTest_01.dll</Assembly>
-    <FullClassName>ScheduleTest_01.Command2</FullClassName>
+    <FullClassName>ScheduleTest_01.cmdFrameAreas</FullClassName>
     <ClientId>fda8809f-b7b1-4766-a3eb-3adc481d0ec0</ClientId>
     <VendorId>com.YOUR COMPANY NAME</VendorId>
     <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>

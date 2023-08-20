@@ -36,7 +36,7 @@ namespace ScheduleTest_01
                 List<string> paramNames = new List<string>() { "Area Category", "Comments", "Name", "Area", "Number" };
 
                 List<Parameter> paramList = Utils.GetParametersByName(doc, paramNames, BuiltInCategory.OST_Areas);
-                Utils.AddFieldsToSchedule(doc, newSched, paramList);
+                //Utils.AddFieldsToSchedule(doc, newSched, paramList);
 
                 // get element Id of the parameters
                 ElementId catFieldId = Utils.GetProjectParameterId(doc, "Area Category");
@@ -61,23 +61,23 @@ namespace ScheduleTest_01
                 //areaField.IsHidden = false;
                 //areaField.ColumnHeading = "Area";
                 //areaField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
-                //areaField.HorizontalAlignment = ScheduleHorizontalAlignment.Right;               
+                //areaField.HorizontalAlignment = ScheduleHorizontalAlignment.Right;
 
                 //ScheduleField numField = newSched.Definition.AddField(ScheduleFieldType.Instance, numFieldId);
                 //numField.IsHidden = true;
 
-                //// create the filters
-                //ScheduleFilter catFilter = new ScheduleFilter(catField.FieldId, ScheduleFilterType.Contains, "Options");
-                //newSched.Definition.AddFilter(catFilter);
+                // create the filters
+                ScheduleFilter catFilter = new ScheduleFilter(catField.FieldId, ScheduleFilterType.NotContains, "Options");
+                newSched.Definition.AddFilter(catFilter);
 
                 //ScheduleFilter areaFilter = new ScheduleFilter(areaField.FieldId, ScheduleFilterType.GreaterThan, "0 SF");
                 //newSched.Definition.AddFilter(areaFilter);
 
-                //// set the sorting
-                //ScheduleSortGroupField catSort = new ScheduleSortGroupField(catField.FieldId, ScheduleSortOrder.Ascending);
-                //catSort.ShowFooter = true;
-                //catSort.ShowFooterCount = true; //??? how to set the footer to be "Title and Totals"
-                //catSort.ShowBlankLine = true;
+                // set the sorting
+                ScheduleSortGroupField catSort = new ScheduleSortGroupField(catField.FieldId, ScheduleSortOrder.Ascending);
+                catSort.ShowFooter = true;
+                catSort.ShowFooterCount = true; //??? how to set the footer to be "Title and Totals"
+                catSort.ShowBlankLine = true;
 
                 //ScheduleSortGroupField comSort = new ScheduleSortGroupField(comField.FieldId, ScheduleSortOrder.Ascending);
 

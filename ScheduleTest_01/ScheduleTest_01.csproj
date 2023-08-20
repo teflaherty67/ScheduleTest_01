@@ -59,9 +59,8 @@
     <Compile Include="App.cs" />
     <Compile Include="cmdVeneer.cs" />
     <Compile Include="cmdIndex.cs" />
-    <Compile Include="cmdWallSchedule.cs" />
     <Compile Include="Utils\ButtonDataClass.cs" />
-    <Compile Include="Command2.cs" />
+    <Compile Include="cmdFrameAreas.cs" />
     <Compile Include="cmdFloorArea.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
