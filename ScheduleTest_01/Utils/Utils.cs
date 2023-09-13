@@ -190,5 +190,15 @@ namespace ScheduleTest_01
         }
 
         #endregion
+
+        internal static ElementId GetBuiltInParameterId(Document doc, BuiltInCategory cat, BuiltInParameter bip)
+        {
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+            collector.OfCategory(cat);
+
+            Parameter curParam = collector.FirstElement().get_Parameter(bip);
+
+            return curParam?.Id;
+        }
     }
 }
