@@ -33,9 +33,9 @@ namespace ScheduleTest_01
                 AreaScheme curAreaScheme = Utils.GetAreaSchemeByName(doc, "S Floor");
                 ViewSchedule newSched = Utils.CreateAreaSchedule(doc, "Floor Areas - Elevation S", curAreaScheme);
 
-                List<string> paramNames = new List<string>() { "Area Category", "Comments", "Name", "Area", "Number" };
+                //List<string> paramNames = new List<string>() { "Area Category", "Comments", "Name", "Area", "Number" };
 
-                List<Parameter> paramList = Utils.GetParametersByName(doc, paramNames, BuiltInCategory.OST_Areas);
+                //List<Parameter> paramList = Utils.GetParametersByName(doc, paramNames, BuiltInCategory.OST_Areas);
                 //Utils.AddFieldsToSchedule(doc, newSched, paramList);
 
                 // get element Id of the parameters
@@ -62,6 +62,7 @@ namespace ScheduleTest_01
                 areaField.ColumnHeading = "Area";
                 areaField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
                 areaField.HorizontalAlignment = ScheduleHorizontalAlignment.Right;
+                areaField.DisplayType = ScheduleFieldDisplayType.Totals;
 
                 ScheduleField numField = newSched.Definition.AddField(ScheduleFieldType.Instance, numFieldId);
                 numField.IsHidden = true;
@@ -83,6 +84,8 @@ namespace ScheduleTest_01
 
                 ScheduleSortGroupField comSort = new ScheduleSortGroupField(comField.FieldId, ScheduleSortOrder.Ascending);
                 newSched.Definition.AddSortGroupField(comSort);
+
+                newSched.Definition.IsItemized = false;
 
                 t.Commit();
             }
