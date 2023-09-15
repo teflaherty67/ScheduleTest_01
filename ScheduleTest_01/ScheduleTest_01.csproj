@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="cmdFloorAreaPlan.cs" />
     <Compile Include="cmdVeneer.cs" />
     <Compile Include="cmdIndex.cs" />
     <Compile Include="Utils\ButtonDataClass.cs" />

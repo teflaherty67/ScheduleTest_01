@@ -191,6 +191,43 @@ namespace ScheduleTest_01
 
         #endregion
 
+        #region View Templates
+
+        public static View GetViewTemplateByName(Document curDoc, string viewTemplateName)
+        {
+            List<View> viewTemplateList = GetAllViewTemplates(curDoc);
+
+            foreach (View v in viewTemplateList)
+            {
+                if (v.Name == viewTemplateName)
+                {
+                    return v;
+                }
+            }
+
+            return null;
+        }
+
+        public static List<View> GetAllViewTemplates(Document curDoc)
+        {
+            List<View> returnList = new List<View>();
+            List<View> viewList = GetAllViews(curDoc);
+
+            //loop through views and check if is view template
+            foreach (View v in viewList)
+            {
+                if (v.IsTemplate == true)
+                {
+                    //add view template to list
+                    returnList.Add(v);
+                }
+            }
+
+            return returnList;
+        }
+
+        #endregion
+
         internal static ElementId GetBuiltInParameterId(Document doc, BuiltInCategory cat, BuiltInParameter bip)
         {
             FilteredElementCollector collector = new FilteredElementCollector(doc);
@@ -199,6 +236,54 @@ namespace ScheduleTest_01
             Parameter curParam = collector.FirstElement().get_Parameter(bip);
 
             return curParam?.Id;
+        }
+
+        internal static Level GetLevelByName(Document doc, string levelWord)
+        {
+            List<Level> levels = GetAllLevels(doc);
+
+            Level returnLevel = null;
+
+            foreach (Level curLevel in levels)
+            {
+                if (curLevel.Name == levelWord)
+                    return returnLevel;
+            }
+
+            return null;
+        }
+
+        public static List<Level> GetAllLevels(Document doc)
+        {
+            FilteredElementCollector colLevels = new FilteredElementCollector(doc);
+            colLevels.OfCategory(BuiltInCategory.OST_Levels);
+
+            List<Level> levels = new List<Level>();
+            foreach (Element x in colLevels.ToElements())
+            {
+                if (x.GetType() == typeof(Level))
+                {
+                    levels.Add((Level)x);
+                }
+            }
+
+            return levels;
+            //order list by elevation
+            //m_levels = (From l In m_levels Order By l.Elevation).tolist()
+        }
+
+        public static List<View> GetAllViews(Document curDoc)
+        {
+            FilteredElementCollector m_colviews = new FilteredElementCollector(curDoc);
+            m_colviews.OfCategory(BuiltInCategory.OST_Views);
+
+            List<View> m_views = new List<View>();
+            foreach (View x in m_colviews.ToElements())
+            {
+                m_views.Add(x);
+            }
+
+            return m_views;
         }
     }
 }
