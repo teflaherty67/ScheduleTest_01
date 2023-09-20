@@ -240,14 +240,12 @@ namespace ScheduleTest_01
 
         internal static Level GetLevelByName(Document doc, string levelWord)
         {
-            List<Level> levels = GetAllLevels(doc);
-
-            Level returnLevel = null;
+            List<Level> levels = GetAllLevels(doc);          
 
             foreach (Level curLevel in levels)
             {
                 if (curLevel.Name == levelWord)
-                    return returnLevel;
+                    return curLevel;
             }
 
             return null;
