@@ -283,5 +283,20 @@ namespace ScheduleTest_01
 
             return m_views;
         }
+
+        internal static AreaTagType GetIndependentTagByName(Document curDoc, string tagName)
+        {
+            FilteredElementCollector m_colTags = new FilteredElementCollector(curDoc)
+                .OfCategory(BuiltInCategory.OST_AreaTags)
+                .WhereElementIsElementType();
+
+            foreach (AreaTagType curtag in m_colTags)
+                if (curtag.Name.Equals(tagName))
+                { 
+                    return curtag;
+                }
+
+            return null;
+        }
     }
 }
