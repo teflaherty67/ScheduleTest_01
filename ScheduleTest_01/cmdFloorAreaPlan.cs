@@ -30,6 +30,7 @@ namespace ScheduleTest_01
             {
                 t.Start("Create Area Plan");
 
+
                 AreaScheme schemeFloor = Utils.GetAreaSchemeByName(curDoc, "S Floor");
                 ElementId schemeFloorId = schemeFloor.Id;
 
@@ -58,9 +59,10 @@ namespace ScheduleTest_01
                 areaLiving1.Number = "1";
                 areaLiving1.Name = "Living";
                 areaLiving1.LookupParameter("Area Category").Set("Total Covered");
-                areaLiving1.LookupParameter("Comments").Set("A");                
-                
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaLiving1), false, TagOrientation.Horizontal, tagInsert);
+                areaLiving1.LookupParameter("Comments").Set("A");
+
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaLiving1), false, TagOrientation.Horizontal, tagInsert);
+                AreaTag tagLiving1 = curDoc.Create.NewAreaTag(areaFloor, areaLiving1, insPoint);
 
                 insPoint = insPoint.Add(offset);
                 
@@ -70,7 +72,8 @@ namespace ScheduleTest_01
                 areaGarage.LookupParameter("Area Category").Set("Total Covered");
                 areaGarage.LookupParameter("Comments").Set("B");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaGarage), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaGarage), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                AreaTag tagGarage = curDoc.Create.NewAreaTag(areaFloor, areaGarage, insPoint);
 
                 insPoint = insPoint.Add(offset);
 
@@ -80,7 +83,7 @@ namespace ScheduleTest_01
                 areaCoveredPatio.LookupParameter("Area Category").Set("Total Covered");
                 areaCoveredPatio.LookupParameter("Comments").Set("C");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaCoveredPatio), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaCoveredPatio), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
 
                 insPoint = insPoint.Add(offset);
 
@@ -90,7 +93,7 @@ namespace ScheduleTest_01
                 areaCoveredPorch.LookupParameter("Area Category").Set("Total Covered");
                 areaCoveredPorch.LookupParameter("Comments").Set("D");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaCoveredPorch), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaCoveredPorch), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
 
                 insPoint = insPoint.Add(offset);
 
@@ -100,7 +103,7 @@ namespace ScheduleTest_01
                 areaPorteCochere.LookupParameter("Area Category").Set("Total Covered");
                 areaPorteCochere.LookupParameter("Comments").Set("E");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaPorteCochere), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaPorteCochere), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
 
                 insPoint = insPoint.Add(offset);
 
@@ -110,7 +113,7 @@ namespace ScheduleTest_01
                 areaPatio.LookupParameter("Area Category").Set("Total Uncovered");
                 areaPatio.LookupParameter("Comments").Set("F");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaPatio), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaPatio), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
 
                 insPoint = insPoint.Add(offset);
 
@@ -120,7 +123,7 @@ namespace ScheduleTest_01
                 areaPorch.LookupParameter("Area Category").Set("Total Uncovered");
                 areaPorch.LookupParameter("Comments").Set("G");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaPorch), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaPorch), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
 
                 insPoint = insPoint.Add(offset);
 
@@ -130,7 +133,7 @@ namespace ScheduleTest_01
                 areaOption1.LookupParameter("Area Category").Set("Options");
                 areaOption1.LookupParameter("Comments").Set("H");
 
-                IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaOption1), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
+                //IndependentTag.Create(curDoc, tagSymbol.Id, areaFloor.Id, new Reference(areaOption1), false, TagOrientation.Horizontal, tagInsert = tagInsert.Add(tagOffset));
 
                 insPoint = insPoint.Add(offset);
 
@@ -146,3 +149,5 @@ namespace ScheduleTest_01
         }
     }
 }
+
+
