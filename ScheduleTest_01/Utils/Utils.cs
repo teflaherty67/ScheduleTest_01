@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ScheduleTest_01
 {
@@ -297,6 +298,17 @@ namespace ScheduleTest_01
                 }
 
             return null;
+        }
+
+        internal static ColorFillScheme GetColorFillSchemeByName(Document curDoc, string schemeName)
+        {
+            ColorFillScheme colorfill = new FilteredElementCollector(curDoc)
+                .OfCategory(BuiltInCategory.OST_ColorFillSchema)
+                .Cast<ColorFillScheme>()
+                .Where(x => x.Name.Equals(schemeName))
+                .First();
+
+            return colorfill;
         }
     }
 }

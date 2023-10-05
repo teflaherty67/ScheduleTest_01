@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 #endregion
@@ -25,11 +26,17 @@ namespace ScheduleTest_01
             // this is a variable for the current Revit model
             Document curDoc = uiapp.ActiveUIDocument.Document;
 
+            // get the category & set category Id
+            Category areaCat = curDoc.Settings.Categories.get_Item(BuiltInCategory.OST_Areas);
+            ElementId areaCatID = areaCat.Id;
+
+            ColorFillScheme schemeColorFill = Utils.GetColorFillSchemeByName(curDoc, "Floor");
+            ElementId schemeColorFillId = schemeColorFill.Id;
+
             // Your code goes here
             using (Transaction t = new Transaction(curDoc))
             {
                 t.Start("Create Area Plan");
-
 
                 AreaScheme schemeFloor = Utils.GetAreaSchemeByName(curDoc, "S Floor");
                 ElementId schemeFloorId = schemeFloor.Id;
@@ -44,6 +51,8 @@ namespace ScheduleTest_01
                 ViewPlan areaFloor = ViewPlan.CreateAreaPlan(curDoc, schemeFloorId, curLevelId);
                 areaFloor.Name = "Floor";
                 areaFloor.ViewTemplateId = vtFloorAreas.Id;
+
+                areaFloor.SetColorFillSchemeId(areaCatID, schemeColorFillId);
 
                 // area insertion points
                 XYZ insStart = new XYZ(0, 0, 0);               
