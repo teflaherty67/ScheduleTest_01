@@ -28,10 +28,10 @@ namespace ScheduleTest_01
 
             // get the category & set category Id
             Category areaCat = curDoc.Settings.Categories.get_Item(BuiltInCategory.OST_Areas);
-            ElementId areaCatID = areaCat.Id;
+            //ElementId areaCatID = areaCat.Id;
 
             ColorFillScheme schemeColorFill = Utils.GetColorFillSchemeByName(curDoc, "Floor");
-            ElementId schemeColorFillId = schemeColorFill.Id;
+            //ElementId schemeColorFillId = schemeColorFill.Id;
 
             // Your code goes here
             using (Transaction t = new Transaction(curDoc))
@@ -41,7 +41,7 @@ namespace ScheduleTest_01
                 AreaScheme schemeFloor = Utils.GetAreaSchemeByName(curDoc, "S Floor");
                 ElementId schemeFloorId = schemeFloor.Id;
 
-                Level curLevel = Utils.GetLevelByName(curDoc, "Main Level");
+                Level curLevel = Utils.GetLevelByName(curDoc, "First Floor");
                 ElementId curLevelId = curLevel.Id;
 
                 AreaTagType tagSymbol = Utils.GetIndependentTagByName(curDoc, "Area Tag");
@@ -52,7 +52,7 @@ namespace ScheduleTest_01
                 areaFloor.Name = "Floor";
                 areaFloor.ViewTemplateId = vtFloorAreas.Id;
 
-                areaFloor.SetColorFillSchemeId(areaCatID, schemeColorFillId);
+                areaFloor.SetColorFillSchemeId(areaCat.Id, schemeColorFill.Id);
 
                 // area insertion points
                 XYZ insStart = new XYZ(0, 0, 0);               
