@@ -4,6 +4,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using ScheduleTest_01;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,10 +30,6 @@ namespace ScheduleTest_01
 
             // get the category & set category Id
             Category areaCat = curDoc.Settings.Categories.get_Item(BuiltInCategory.OST_Areas);
-            //ElementId areaCatID = areaCat.Id;
-
-            ColorFillScheme schemeColorFill = Utils.GetColorFillSchemeByName(curDoc, "Floor");
-            //ElementId schemeColorFillId = schemeColorFill.Id;
 
             // Your code goes here
             using (Transaction t = new Transaction(curDoc))
@@ -40,51 +37,46 @@ namespace ScheduleTest_01
                 t.Start("Create Area Plan");
 
                 AreaScheme schemeFloor = Utils.GetAreaSchemeByName(curDoc, "S Floor");
+                ElementId schemeFloorId = schemeFloor.Id;
+
                 Level curLevel = Utils.GetLevelByName(curDoc, "First Floor");
+                ElementId curLevelId = curLevel.Id;
+
                 View vtFloorAreas = Utils.GetViewTemplateByName(curDoc, "10-Floor Area");
 
-                ViewPlan areaFloor = ViewPlan.CreateAreaPlan(curDoc, schemeFloor.Id, curLevel.Id);
+                ViewPlan areaFloor = ViewPlan.CreateAreaPlan(curDoc, schemeFloorId, curLevelId);
                 areaFloor.Name = "Floor";
                 areaFloor.ViewTemplateId = vtFloorAreas.Id;
+
+                ColorFillScheme schemeColorFill = Utils.GetColorFillSchemeByName(curDoc, "Floor", schemeFloor);
                 areaFloor.SetColorFillSchemeId(areaCat.Id, schemeColorFill.Id);
 
-                UV insPoint = new UV(0, 0);
-                UV offset = new UV(0, 10);
+                XYZ insStart = new XYZ(50, 0, 0);
+                UV insPoint = new UV(insStart.X, insStart.Y);
+                XYZ tagInsert = new XYZ(50, 0, 0);
 
-                List<(string number, string name, string category, string comments)> areas = new List<(string, string, string, string)>
-    {
-        ("1", "Living", "Total Covered", "A"),
-        ("2", "Garage", "Total Covered", "B"),
-        ("3", "Covered Patio", "Total Covered", "C"),
-        //... Add the rest of the areas here
-    };
+                List<clsAreaInfo> areas = new List<clsAreaInfo>
+                {
+                    new clsAreaInfo("1", "Living", "Total Covered", "A"),
+                    new clsAreaInfo("2", "Garage", "Total Covered", "B"),
+                    new clsAreaInfo("3", "Covered Patio", "Total Covered", "C"),
+                    new clsAreaInfo("4", "Covered Porch", "Total Covered", "D"),
+                    new clsAreaInfo("5", "Porte Cochere", "Total Covered", "E"),
+                    new clsAreaInfo("6", "Patio", "Total Uncovered", "F"),
+                    new clsAreaInfo("7", "Porch", "Total Uncovered", "G"),
+                    new clsAreaInfo("8", "Option", "Options", "H")
+                };
 
                 foreach (var areaInfo in areas)
                 {
-                    CreateAndTagArea(curDoc, areaFloor, insPoint, areaInfo.number, areaInfo.name, areaInfo.category, areaInfo.comments);
-                    insPoint = insPoint.Add(offset);
+                    Utils.CreateAreaWithTag(curDoc, areaFloor, ref insPoint, ref tagInsert, areaInfo);
                 }
 
                 t.Commit();
             }
 
             return Result.Succeeded;
-        }
-
-        private Area CreateAndTagArea(Document curDoc, ViewPlan areaFloor, UV insPoint, string number, string name, string category, string comments)
-        {
-            Area area = curDoc.Create.NewArea(areaFloor, insPoint);
-            area.Number = number;
-            area.Name = name;
-            area.LookupParameter("Area Category").Set(category);
-            area.LookupParameter("Comments").Set(comments);
-
-            // Assuming you still want to create the AreaTag
-            AreaTag tag = curDoc.Create.NewAreaTag(areaFloor, area, insPoint);
-
-            return area;
-        }
-
+        }       
 
         public static String GetMethod()
         {
@@ -93,24 +85,3 @@ namespace ScheduleTest_01
         }
     }
 }
-
-//internal static ColorFillScheme GetColorFillSchemeByName(Document curDoc, string schemeName, AreaScheme areaScheme)
-
-//{
-
-//    ColorFillScheme colorfill = new FilteredElementCollector(curDoc)
-
-//        .OfCategory(BuiltInCategory.OST_ColorFillSchema)
-
-//        .Cast<ColorFillScheme>()
-
-//        .Where(x => x.Name.Equals(schemeName) && x.AreaSchemeId.Equals(areaScheme.Id))
-
-//        .First();
-
-
-//    return colorfill;
-
-//}
-
-

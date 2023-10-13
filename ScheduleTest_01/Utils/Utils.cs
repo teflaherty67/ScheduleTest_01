@@ -300,15 +300,34 @@ namespace ScheduleTest_01
             return null;
         }
 
-        internal static ColorFillScheme GetColorFillSchemeByName(Document curDoc, string schemeName)
+        internal static ColorFillScheme GetColorFillSchemeByName(Document curDoc, string schemeName, AreaScheme areaScheme)
         {
             ColorFillScheme colorfill = new FilteredElementCollector(curDoc)
                 .OfCategory(BuiltInCategory.OST_ColorFillSchema)
                 .Cast<ColorFillScheme>()
-                .Where(x => x.Name.Equals(schemeName))
+                .Where(x => x.Name.Equals(schemeName) && x.AreaSchemeId.Equals(areaScheme.Id))
                 .First();
 
             return colorfill;
+        }
+
+        internal static void CreateAreaWithTag(Document curDoc, ViewPlan areaFloor, ref UV insPoint, ref XYZ tagInsert, clsAreaInfo areaInfo)
+        {
+            Area area = curDoc.Create.NewArea(areaFloor, insPoint);
+            area.Number = areaInfo.Number;
+            area.Name = areaInfo.Name;
+            area.LookupParameter("Area Category").Set(areaInfo.Category);
+            area.LookupParameter("Comments").Set(areaInfo.Comments);
+
+            AreaTag tag = curDoc.Create.NewAreaTag(areaFloor, area, insPoint);
+            tag.TagHeadPosition = tagInsert;
+            tag.HasLeader = false;
+
+            UV offset = new UV(0, 8);
+            insPoint = insPoint.Subtract(offset);
+
+            XYZ tagOffset = new XYZ(0, 8, 0);
+            tagInsert = tagInsert.Subtract(tagOffset);
         }
     }
 }
