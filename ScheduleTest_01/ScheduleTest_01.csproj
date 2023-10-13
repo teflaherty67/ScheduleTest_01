@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="clsAreaInfo.cs" />
-    <Compile Include="cmdFloorAreaPlan - Copy.cs" />
+    <Compile Include="cmdFloorAreaPlanTest.cs" />
     <Compile Include="cmdFloorAreaPlan.cs" />
     <Compile Include="cmdAtticAreas.cs" />
     <Compile Include="cmdVeneer.cs" />
