@@ -266,9 +266,7 @@ namespace ScheduleTest_01
                 }
             }
 
-            return levels;
-            //order list by elevation
-            //m_levels = (From l In m_levels Order By l.Elevation).tolist()
+            return levels;          
         }
 
         public static List<View> GetAllViews(Document curDoc)
@@ -313,13 +311,13 @@ namespace ScheduleTest_01
 
         internal static void CreateAreaWithTag(Document curDoc, ViewPlan areaFloor, ref UV insPoint, ref XYZ tagInsert, clsAreaInfo areaInfo)
         {
-            Area area = curDoc.Create.NewArea(areaFloor, insPoint);
-            area.Number = areaInfo.Number;
-            area.Name = areaInfo.Name;
-            area.LookupParameter("Area Category").Set(areaInfo.Category);
-            area.LookupParameter("Comments").Set(areaInfo.Comments);
+            Area curArea = curDoc.Create.NewArea(areaFloor, insPoint);
+            curArea.Number = areaInfo.Number;
+            curArea.Name = areaInfo.Name;
+            curArea.LookupParameter("Area Category").Set(areaInfo.Category);
+            curArea.LookupParameter("Comments").Set(areaInfo.Comments);
 
-            AreaTag tag = curDoc.Create.NewAreaTag(areaFloor, area, insPoint);
+            AreaTag tag = curDoc.Create.NewAreaTag(areaFloor, curArea, insPoint);
             tag.TagHeadPosition = tagInsert;
             tag.HasLeader = false;
 
