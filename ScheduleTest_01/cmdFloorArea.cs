@@ -40,16 +40,23 @@ namespace ScheduleTest_01
 
                 // get element Id of the parameters
                 ElementId catFieldId = Utils.GetProjectParameterId(doc, "Area Category");
-                ElementId comFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Rooms, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS);
-                ElementId nameFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Rooms, BuiltInParameter.ROOM_NAME);
-                ElementId areaFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Rooms, BuiltInParameter.ROOM_AREA);
-                ElementId numFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Rooms, BuiltInParameter.ROOM_NUMBER);
+                ElementId comFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS);
+                ElementId levelFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.LEVEL_NAME);
+                ElementId nameFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_NAME);
+                ElementId areaFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_AREA);
+                ElementId numFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_NUMBER);
 
                 ScheduleField catField = newSched.Definition.AddField(ScheduleFieldType.Instance, catFieldId);
                 catField.IsHidden = true;
 
                 ScheduleField comField = newSched.Definition.AddField(ScheduleFieldType.Instance, comFieldId);
                 comField.IsHidden = true;
+
+                ScheduleField levelField = newSched.Definition.AddField(ScheduleFieldType.ViewBased, levelFieldId);
+                levelField.IsHidden = false;
+                levelField.ColumnHeading = "Level";
+                levelField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
+                levelField.HorizontalAlignment = ScheduleHorizontalAlignment.Left;
 
                 ScheduleField nameField = newSched.Definition.AddField(ScheduleFieldType.Instance, nameFieldId);
                 nameField.IsHidden = false;
