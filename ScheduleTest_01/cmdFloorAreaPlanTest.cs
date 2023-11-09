@@ -39,7 +39,7 @@ namespace ScheduleTest_01
                 AreaScheme schemeFloor = Utils.GetAreaSchemeByName(curDoc, "S Floor");
                 ElementId schemeFloorId = schemeFloor.Id;
 
-                Level curLevel = Utils.GetLevelByName(curDoc, "First Floor");
+                Level curLevel = Utils.GetLevelByName(curDoc, "Main Level");
                 ElementId curLevelId = curLevel.Id;
 
                 View vtFloorAreas = Utils.GetViewTemplateByName(curDoc, "10-Floor Area");
