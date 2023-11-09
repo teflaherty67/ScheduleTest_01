@@ -47,7 +47,7 @@ namespace ScheduleTest_01
                 ScheduleField comField = newSched.Definition.AddField(ScheduleFieldType.Instance, comFieldId);
                 comField.IsHidden = true;
 
-                ScheduleField levelField = newSched.Definition.AddField(ScheduleFieldType.ViewBased, levelFieldId);
+                ScheduleField levelField = newSched.Definition.AddField(ScheduleFieldType.Instance, levelFieldId);
                 levelField.IsHidden = false;
                 levelField.ColumnHeading = "Level";
                 levelField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
