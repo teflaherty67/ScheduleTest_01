@@ -31,12 +31,7 @@ namespace ScheduleTest_01
                 t.Start("Create Schedule");
 
                 AreaScheme curAreaScheme = Utils.GetAreaSchemeByName(doc, "S Floor");
-                ViewSchedule newSched = Utils.CreateAreaSchedule(doc, "Floor Areas - Elevation S", curAreaScheme);
-
-                //List<string> paramNames = new List<string>() { "Area Category", "Comments", "Name", "Area", "Number" };
-
-                //List<Parameter> paramList = Utils.GetParametersByName(doc, paramNames, BuiltInCategory.OST_Areas);
-                //Utils.AddFieldsToSchedule(doc, newSched, paramList);
+                ViewSchedule newSched = Utils.CreateAreaSchedule(doc, "Floor Areas - Elevation S", curAreaScheme);                
 
                 // get element Id of the parameters
                 ElementId catFieldId = Utils.GetProjectParameterId(doc, "Area Category");
