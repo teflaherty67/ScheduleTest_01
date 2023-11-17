@@ -41,7 +41,7 @@ namespace ScheduleTest_01
                 // get element Id of the parameters
                 ElementId catFieldId = Utils.GetProjectParameterId(doc, "Area Category");
                 ElementId comFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS);
-                ElementId levelFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.LEVEL_NAME);
+                ElementId levelFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_LEVEL_ID);
                 ElementId nameFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_NAME);
                 ElementId areaFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_AREA);
                 ElementId numFieldId = Utils.GetBuiltInParameterId(doc, BuiltInCategory.OST_Areas, BuiltInParameter.ROOM_NUMBER);
@@ -52,14 +52,14 @@ namespace ScheduleTest_01
                 ScheduleField comField = newSched.Definition.AddField(ScheduleFieldType.Instance, comFieldId);
                 comField.IsHidden = true;
 
-                ScheduleField levelField = newSched.Definition.AddField(ScheduleFieldType.ViewBased, levelFieldId);
+                ScheduleField levelField = newSched.Definition.AddField(ScheduleFieldType.Instance, levelFieldId);
                 levelField.IsHidden = false;
                 levelField.ColumnHeading = "Level";
                 levelField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
                 levelField.HorizontalAlignment = ScheduleHorizontalAlignment.Left;
 
                 ScheduleField nameField = newSched.Definition.AddField(ScheduleFieldType.Instance, nameFieldId);
-                nameField.IsHidden = false;
+                nameField.IsHidden = true;
                 nameField.ColumnHeading = "Name";
                 nameField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
                 nameField.HorizontalAlignment = ScheduleHorizontalAlignment.Left;
@@ -85,12 +85,19 @@ namespace ScheduleTest_01
                 ScheduleSortGroupField catSort = new ScheduleSortGroupField(catField.FieldId, ScheduleSortOrder.Ascending);                
                 catSort.ShowFooter = true;
                 catSort.ShowFooterTitle = true;
-                catSort.ShowFooterCount = true;
                 catSort.ShowBlankLine = true;
                 newSched.Definition.AddSortGroupField(catSort);
 
                 ScheduleSortGroupField comSort = new ScheduleSortGroupField(comField.FieldId, ScheduleSortOrder.Ascending);
                 newSched.Definition.AddSortGroupField(comSort);
+
+                ScheduleSortGroupField nameSort = new ScheduleSortGroupField(nameField.FieldId, ScheduleSortOrder.Ascending);
+                nameSort.ShowFooter = true;
+                nameSort.ShowHeader = true;
+                newSched.Definition.AddSortGroupField(nameSort);
+
+                ScheduleSortGroupField levelSort = new ScheduleSortGroupField(levelField.FieldId, ScheduleSortOrder.Ascending);
+                newSched.Definition.AddSortGroupField(levelSort);
 
                 newSched.Definition.IsItemized = false;
 
