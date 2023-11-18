@@ -327,5 +327,22 @@ namespace ScheduleTest_01
             XYZ tagOffset = new XYZ(0, 8, 0);
             tagInsert = tagInsert.Subtract(tagOffset);
         }
+
+        internal static void FormatAreaFields(ViewSchedule schedName)
+        {
+            int nFields = schedName.Definition.GetFieldCount();
+            for (int n = 0; n < nFields; n++)
+            {
+                ScheduleField field = schedName.Definition.GetField(n);
+                if (field.GetSpecTypeId() == SpecTypeId.Area)
+                {
+                    FormatOptions formatOpts = new FormatOptions();
+                    formatOpts.UseDefault = false;
+                    formatOpts.SetUnitTypeId(UnitTypeId.SquareFeet);
+                    formatOpts.SetSymbolTypeId(SymbolTypeId.Sf);                
+                    field.SetFormatOptions(formatOpts);
+                }
+            }
+        }
     }
 }
