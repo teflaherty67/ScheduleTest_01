@@ -65,7 +65,13 @@ namespace ScheduleTest_01
                 areaField.HeadingOrientation = ScheduleHeadingOrientation.Horizontal;
                 areaField.HorizontalAlignment = ScheduleHorizontalAlignment.Right;
                 areaField.DisplayType = ScheduleFieldDisplayType.Totals;
-                areaField.SetFormatOptions(Utils.FormatAreaFields(newSched));
+
+                FormatOptions formatOpts = new FormatOptions();
+                formatOpts.UseDefault = false;
+                formatOpts.SetUnitTypeId(UnitTypeId.SquareFeet);
+                formatOpts.SetSymbolTypeId(SymbolTypeId.Sf);
+                
+                areaField.SetFormatOptions(formatOpts);
 
                 ScheduleField numField = newSched.Definition.AddField(ScheduleFieldType.Instance, numFieldId);
                 numField.IsHidden = true;
